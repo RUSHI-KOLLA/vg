@@ -1,20 +1,26 @@
 # Local config (contains secrets)
 .env
+.env.*
 
-# Cache
+# Local DB / Caches
+chroma_db/
 cache/
+vg_cache/
+.chroma/
 
 # Python
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
+*$py.class
 venv/
 .venv/
+env/
+.env/
 
-# IDE
+# IDE / OS
 .vscode/
 .idea/
-
-# OS
 .DS_Store
 .aider*
+*.log
+vg_report.json
