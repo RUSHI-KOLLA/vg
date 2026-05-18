@@ -9,6 +9,20 @@
 
 ---
 
+## 🔴 Try it Live
+
+The application is deployed and ready to use! Because VG Intelligence uses advanced multi-agent architecture, you must bring your own API key to power the logic engine.
+
+**[Launch VG Intelligence Live App](https://vg-production-1df6.up.railway.app/)**
+
+**How to use the live app:**
+1. Go to the [Groq Console](https://console.groq.com/keys) and create a free API Key.
+2. Open the [VG Live App](https://vg-production-1df6.up.railway.app/).
+3. A setup screen will appear. Paste your Groq API Key and click **Connect**. *(Your key is stored safely in your browser and is never saved to our servers)*.
+4. Type a political question into the terminal and press Execute!
+
+---
+
 ## 🚀 Key Features
 
 ### World-Class Optimizations
