@@ -1,0 +1,20 @@
+# Local config (contains secrets)
+.env
+
+# Cache
+cache/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+.aider*

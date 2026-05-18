@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POLITICORE — Pattern Recognizer AI</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%2305080f' stroke='%2300e5ff' stroke-width='2'/><circle cx='16' cy='16' r='4' fill='%2300e5ff'/><line x1='16' y1='2' x2='16' y2='12' stroke='%2300e5ff' stroke-width='1'/><line x1='16' y1='20' x2='16' y2='30' stroke='%2300e5ff' stroke-width='1'/><line x1='2' y1='16' x2='12' y2='16' stroke='%2300e5ff' stroke-width='1'/><line x1='20' y1='16' x2='30' y2='16' stroke='%2300e5ff' stroke-width='1'/></svg>" type="image/svg+xml">
+    <meta name="description" content="POLITICORE: An AI-powered political pattern recognition system that analyzes events, speeches, policies, alliances, and reveals hidden connections in real time.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Scanline overlay -->
+    <div class="scanline-overlay"></div>
+
+    <!-- Three.js Canvas -->
+    <canvas id="three-canvas"></canvas>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="header-left">
+            <div class="logo-container">
+                <div class="logo-glow"></div>
+                <h1 class="logo-text">POLITICORE</h1>
+                <span class="logo-subtitle">PATTERN RECOGNIZER AI</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="status-bar">
+                <div class="status-dot" id="status-dot"></div>
+                <span class="status-text" id="status-text">SYSTEM ONLINE — AWAITING QUERY</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="header-stat">
+                <span class="stat-label">PATTERNS</span>
+                <span class="stat-value" id="pattern-count">0</span>
+            </div>
+            <div class="header-stat">
+                <span class="stat-label">NODES</span>
+                <span class="stat-value" id="node-count">0</span>
+            </div>
+            <div class="settings-orb" id="settings-orb">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+                </svg>
+            </div>
+            <div class="user-avatar" id="user-avatar">
+                <div class="avatar-ring"></div>
+                <span>AI</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Left Panel — Query Input -->
+    <aside id="left-panel" class="glass-panel">
+        <div class="panel-header">
+            <div class="panel-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            </div>
+            <h2>INTELLIGENCE QUERY</h2>
+        </div>
+
+        <div class="query-section">
+            <div class="query-input-container">
+                <textarea id="query-input" placeholder="Ask POLITICORE anything...&#10;&#10;e.g. &quot;What hidden alliances are forming around the upcoming election?&quot;" rows="4"></textarea>
+                <button class="voice-orb" id="voice-btn" title="Voice Input">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                </button>
+            </div>
+
+            <div class="preset-queries">
+                <span class="preset-label">QUICK QUERIES</span>
+                <button class="preset-btn" data-query="What hidden alliances are forming around the upcoming election?">Hidden Alliances</button>
+                <button class="preset-btn" data-query="Analyze sentiment shifts in political speeches over the last 6 months.">Sentiment Shifts</button>
+                <button class="preset-btn" data-query="Which policies are connected to corporate lobbying networks?">Lobbying Networks</button>
+                <button class="preset-btn" data-query="Predict voter trend changes based on recent scandals and media coverage.">Voter Trends</button>
+            </div>
+        </div>
+
+        <button id="execute-btn" class="execute-button">
+            <div class="execute-bg"></div>
+            <div class="execute-ripple"></div>
+            <div class="execute-charge"></div>
+            <span class="execute-text">EXECUTE ANALYSIS</span>
+            <svg class="execute-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </button>
+
+        <div class="analysis-modes">
+            <span class="modes-label">ANALYSIS MODE</span>
+            <div class="mode-buttons">
+                <button class="mode-btn active" data-mode="deep">DEEP SCAN</button>
+                <button class="mode-btn" data-mode="rapid">RAPID</button>
+                <button class="mode-btn" data-mode="predictive">PREDICTIVE</button>
+            </div>
+        </div>
+
+        <div class="ai-confidence" id="ai-confidence">
+            <div class="confidence-header">
+                <span>AI CONFIDENCE</span>
+                <span class="confidence-value" id="confidence-value">—</span>
+            </div>
+            <div class="confidence-bar">
+                <div class="confidence-fill" id="confidence-fill"></div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Right Panel — Insights -->
+    <aside id="right-panel" class="glass-panel">
+        <div class="panel-header">
+            <div class="panel-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <h2>PATTERN INSIGHTS</h2>
+            <button class="panel-toggle" id="right-toggle">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+        </div>
+
+        <div class="insights-container" id="insights-container">
+            <div class="insight-placeholder">
+                <div class="placeholder-orb">
+                    <div class="orb-ring"></div>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <p>Execute an analysis to reveal<br>hidden political patterns</p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Bottom Timeline -->
+    <div id="bottom-bar" class="glass-panel">
+        <div class="timeline-header">
+            <span class="timeline-label">PATTERN EVOLUTION TIMELINE</span>
+            <div class="timeline-controls">
+                <button class="tl-btn" id="tl-play">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </button>
+                <span class="tl-date" id="tl-date">2024 — 2026</span>
+            </div>
+        </div>
+        <div class="timeline-track">
+            <div class="timeline-progress" id="timeline-progress"></div>
+            <div class="timeline-markers" id="timeline-markers"></div>
+            <div class="timeline-scrubber" id="timeline-scrubber"></div>
+        </div>
+        <div class="timeline-events" id="timeline-events">
+            <div class="tl-event" style="left: 10%"><span>Election<br>Announced</span></div>
+            <div class="tl-event" style="left: 25%"><span>Alliance<br>Shift</span></div>
+            <div class="tl-event" style="left: 45%"><span>Scandal<br>Breaks</span></div>
+            <div class="tl-event" style="left: 65%"><span>Policy<br>Reversal</span></div>
+            <div class="tl-event" style="left: 82%"><span>Voter Surge<br>Detected</span></div>
+        </div>
+    </div>
+
+    <!-- Insight Cards (spawned dynamically) -->
+    <div id="insight-cards-container"></div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay">
+        <div class="loader-container">
+            <div class="loader-ring"></div>
+            <div class="loader-ring ring-2"></div>
+            <div class="loader-ring ring-3"></div>
+            <div class="loader-core"></div>
+            <p class="loader-text">INITIALIZING POLITICORE</p>
+            <p class="loader-subtext" id="loader-subtext">Loading neural pattern engine...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/graph.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>
