@@ -2,8 +2,10 @@
 
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Built In: 15 Days](https://img.shields.io/badge/Built_In-15_Days-E85D04.svg?style=flat-square)](#)
 
-**VG Intelligence** is a multi-agent political analysis system that combines historical wisdom, real-time evidence, and algorithmic pattern detection to deliver high-confidence insights with minimal token consumption.
+> **🚀 Built from scratch in just 15 days.** 
+> **VG Intelligence** is a multi-agent political analysis system that combines historical wisdom, real-time evidence, and algorithmic pattern detection to deliver high-confidence insights with minimal token consumption.
 
 ---
 
