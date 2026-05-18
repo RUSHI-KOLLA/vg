@@ -17,33 +17,10 @@ import json
 import textwrap
 
 if __package__ in (None, ""):
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    parent_dir = os.path.dirname(current_dir)
-    
-    # If the folder is named 'vg' (local development), parent_dir works perfectly.
-    if os.path.basename(current_dir) == "vg":
-        sys.path.insert(0, parent_dir)
-    else:
-        # On Railway, the folder is usually named '/app' or '/workspace'.
-        # We must alias the current directory as 'vg' so imports work.
-        sys.path.insert(0, current_dir)
-        import importlib.util
-        import importlib.machinery
-        
-        # Create a dynamic module for 'vg' pointing to the current directory
-        if "vg" not in sys.modules:
-            spec = importlib.machinery.PathFinder.find_spec("__init__", [current_dir])
-            if spec is None:
-                # Fallback if __init__.py is missing
-                from types import ModuleType
-                vg_mod = ModuleType("vg")
-                vg_mod.__path__ = [current_dir]
-                sys.modules["vg"] = vg_mod
-            else:
-                spec.name = "vg"
-                vg_mod = importlib.util.module_from_spec(spec)
-                sys.modules["vg"] = vg_mod
-                spec.loader.exec_module(vg_mod)
+    PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    if PROJECT_ROOT in sys.path:
+        sys.path.remove(PROJECT_ROOT)
+    sys.path.insert(0, PROJECT_ROOT)
 
 from vg.config import config
 
