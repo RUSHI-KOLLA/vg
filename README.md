@@ -325,4 +325,4 @@ MIT License — see LICENSE file for details.
 
 ---
 
-**Built with ❤️ for geopolitical analysts, researchers, and strategic planners.**
+**Built with ❤️ for geopolitical analysts, researchers, and strategic planners. Engineered entirely with the assistance of Antigravity AI and CodeX.**
