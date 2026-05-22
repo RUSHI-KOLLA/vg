@@ -569,7 +569,8 @@
         }
 
         /* ═══════════════════════════════════════════════════════
-           MOBILE RESPONSIVE (screens under 768px)
+           MOBILE RESPONSIVE — Redesigned for native feel
+           Layout: Header (sticky) → scrollable feed → command bar (fixed)
            ═══════════════════════════════════════════════════════ */
         @media (max-width: 768px) {
 
@@ -610,88 +611,136 @@
                 padding: 14px 30px;
             }
 
-            /* ─── App Header ─── */
+            .scroll-indicator {
+                font-size: 10px;
+                letter-spacing: 0.2em;
+            }
+
+            /* ─── App Interface — vertical column layout ─── */
+            #app-interface {
+                justify-content: flex-start;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 75px; /* room for fixed command bar */
+            }
+
+            /* ─── App Header — compact, sticky ─── */
             .app-top {
                 flex-direction: column;
-                gap: 4px;
-                padding: 12px 15px;
+                gap: 2px;
+                padding: 10px 15px;
                 font-size: 9px;
                 letter-spacing: 0.1em;
                 text-align: center;
+                flex-shrink: 0;
+                background: rgba(0, 0, 0, 0.85);
+                backdrop-filter: blur(10px);
+                position: sticky;
+                top: 0;
+                z-index: 30;
             }
 
-            /* ─── Live Intercept Panel ─── */
-            .live-intercept {
-                position: fixed;
-                top: auto;
-                bottom: 80px;
-                left: 0;
-                right: 0;
-                width: 100%;
-                max-height: 35vh;
-                border-radius: 8px 8px 0 0;
-                border: 1px solid var(--matrix-green);
-                border-bottom: none;
-                font-size: 10px;
-                padding: 10px;
-                z-index: 60;
-            }
+            /* ──────────────────────────────────────────────
+               KEY CHANGE: Panels become in-flow blocks
+               instead of floating absolute-positioned overlays.
+               They stack vertically like a feed.
+               ────────────────────────────────────────────── */
 
-            .live-intercept.show {
-                transform: translateX(0);
-            }
-
-            /* ─── Results Side Panel (Verdict) ─── */
+            /* Verdict panel — shows as a card in the feed */
             .app-side {
-                position: fixed;
+                position: relative;
                 top: auto;
-                bottom: 80px;
-                left: 0;
-                right: 0;
+                right: auto;
                 width: 100%;
-                max-height: 45vh;
+                max-height: none;
+                background: rgba(0, 0, 0, 0.85);
                 border-right: none;
-                border-top: 2px solid var(--ember-gold);
-                border-radius: 8px 8px 0 0;
+                border-bottom: 2px solid var(--ember-gold);
+                border-radius: 0;
                 padding: 20px 15px;
-                overflow-y: auto;
-                transform: translateY(100%);
-                z-index: 55;
+                backdrop-filter: blur(10px);
+                overflow-y: visible;
+                flex-shrink: 0;
+                /* Override desktop show/hide transform */
+                transform: none;
+                opacity: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: opacity 0.4s ease, max-height 0.5s ease;
             }
 
             .app-side.show {
-                transform: translateY(0);
+                transform: none;
+                opacity: 1;
+                max-height: 600px;
+                overflow-y: visible;
             }
 
             .side-title {
-                font-size: 14px;
-                margin-bottom: 10px;
+                font-size: 13px;
+                margin-bottom: 8px;
             }
 
             .side-verdict {
-                font-size: 20px;
+                font-size: 18px;
+                line-height: 1.3;
                 margin-bottom: 12px;
             }
 
             .side-data {
                 font-size: 12px;
+                line-height: 1.5;
                 margin-bottom: 10px;
             }
 
-            /* ─── Command Bar ─── */
+            /* Live intercept — shows as a feed below verdict */
+            .live-intercept {
+                position: relative;
+                top: auto;
+                left: auto;
+                width: 100%;
+                max-height: none;
+                background: rgba(0, 0, 0, 0.9);
+                border: none;
+                border-left: 3px solid var(--matrix-green);
+                border-radius: 0;
+                padding: 12px 15px;
+                font-size: 11px;
+                backdrop-filter: blur(10px);
+                flex-shrink: 0;
+                /* Override desktop slide-in transform */
+                transform: none;
+                opacity: 0;
+                max-height: 0;
+                overflow: hidden;
+                transition: opacity 0.4s ease, max-height 0.5s ease;
+            }
+
+            .live-intercept.show {
+                transform: none;
+                opacity: 1;
+                max-height: 50vh;
+                overflow-y: auto;
+            }
+
+            /* ─── Command Bar — fixed at bottom, always visible ─── */
             .app-bottom {
-                padding: 10px 12px;
                 position: fixed;
                 bottom: 0;
                 left: 0;
                 right: 0;
-                z-index: 70;
+                padding: 10px 12px;
                 background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(15px);
+                border-top: 1px solid rgba(79, 184, 201, 0.15);
+                z-index: 80;
+                margin-top: 0;
             }
 
             .cmd-wrapper {
                 padding: 10px 12px;
                 border-radius: 8px;
+                max-width: 100%;
             }
 
             .cmd-prompt {
@@ -701,15 +750,17 @@
 
             .cmd-input {
                 font-size: 14px;
+                min-width: 0; /* prevent overflow */
             }
 
             .cmd-btn {
                 font-size: 11px;
                 padding: 8px 12px;
                 letter-spacing: 0.1em;
+                white-space: nowrap;
             }
 
-            /* ─── Setup Modal ─── */
+            /* ─── Setup Modal — mobile-friendly ─── */
             .setup-modal {
                 width: 92vw;
                 max-width: 92vw;
@@ -731,25 +782,21 @@
 
             .setup-input {
                 width: 100%;
-                font-size: 13px;
+                font-size: 14px;
+                padding: 14px 12px;
             }
 
             .setup-btn {
                 width: 100%;
                 padding: 14px;
+                font-size: 13px;
             }
 
             #setup-close-btn {
                 top: 10px !important;
                 right: 10px !important;
                 font-size: 12px !important;
-                padding: 4px 10px !important;
-            }
-
-            /* ─── Scroll indicator ─── */
-            .scroll-indicator {
-                font-size: 10px;
-                letter-spacing: 0.2em;
+                padding: 6px 12px !important;
             }
         }
     </style>
