@@ -19,7 +19,7 @@ from datetime import datetime
 from vg.config import config
 from vg.agents.config import AgentRole, AGENT_CONFIGS
 from vg.core.llm_client import get_async_llm_client
-from vg.search.web import search_news, search_news_dual, search_contrarian, has_real_news_content
+from vg.search.web import search_news, search_contrarian, has_real_news_content
 
 # Import optimization layer
 from vg.core.optimization import (
@@ -163,7 +163,7 @@ class EnhancedDebateCoordinator:
 
         # ── STEP 2: Web Search ─────────────────────────────────────────
         print("🔍 Step 2: Searching for real news...")
-        web_news = search_news_dual(question)
+        web_news = search_news(question)
         pipeline_log["web_news"] = web_news[:500] if len(web_news) > 500 else web_news
 
         # ── STEP 3: Web News Intelligence Summarization ──────────────────
@@ -186,7 +186,7 @@ class EnhancedDebateCoordinator:
         kg_summary = ""
         kg_judge_summary = ""
         try:
-            kg_llm = get_async_llm_client(model=config.model_large, api_key=self.api_key)
+            kg_llm = get_async_llm_client(model=config.model_small, api_key=self.api_key)
             knowledge_graph = await self.kg_builder.build(question, web_news, kg_llm)
             kg_summary = KnowledgeGraphBuilder.format_for_agents(knowledge_graph)
             kg_judge_summary = KnowledgeGraphBuilder.format_for_judge(knowledge_graph)
