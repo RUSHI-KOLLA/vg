@@ -573,7 +573,7 @@
            Verdict = inline card · Intercept = slide-out drawer
            ═══════════════════════════════════════════════════════ */
 
-        /* Toggle button — HIDDEN on desktop */
+        /* Toggle button — HIDDEN by default (desktop + landing page) */
         .intercept-toggle {
             display: none;
         }
@@ -720,13 +720,12 @@
                 transform: translateX(0) !important; /* Open when toggle is pressed */
             }
 
-            /* ─── Intercept Toggle Arrow — left edge tab ─── */
-            .intercept-toggle {
+            /* ─── Intercept Toggle Arrow — only visible in app mode ─── */
+            body.app-mode .intercept-toggle {
                 display: block;
                 position: fixed;
                 left: 0;
-                top: 50%;
-                transform: translateY(-50%);
+                bottom: 85px;
                 z-index: 91;
                 background: rgba(0, 0, 0, 0.85);
                 border: 1px solid var(--matrix-green);
@@ -743,12 +742,12 @@
                 line-height: 1;
             }
 
-            .intercept-toggle:active {
+            body.app-mode .intercept-toggle:active {
                 background: var(--matrix-green);
                 color: #000;
             }
 
-            .intercept-toggle.open {
+            body.app-mode .intercept-toggle.open {
                 left: min(85vw, 340px);
             }
 
