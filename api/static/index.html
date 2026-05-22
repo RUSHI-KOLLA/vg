@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>THE VG // Predictive Intelligence</title>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+
     <!-- Three.js (r128) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
+
     <!-- GSAP & ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -63,7 +66,7 @@
             position: fixed;
             inset: 0;
             z-index: 2;
-            background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.8) 100%);
+            background: radial-gradient(circle at center, transparent 30%, rgba(0, 0, 0, 0.8) 100%);
             pointer-events: none;
         }
 
@@ -129,13 +132,20 @@
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translate(-50%, 0); }
-            50% { transform: translate(-50%, 10px); }
+
+            0%,
+            100% {
+                transform: translate(-50%, 0);
+            }
+
+            50% {
+                transform: translate(-50%, 10px);
+            }
         }
 
         .content-block {
             max-width: 600px;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0, 0, 0, 0.4);
             border-left: 2px solid var(--cold-cyan);
             padding: 40px;
             backdrop-filter: blur(10px);
@@ -158,6 +168,7 @@
         .content-right h2 {
             color: var(--bright-gold);
         }
+
         .content-block p {
             font-size: 18px;
             line-height: 1.6;
@@ -190,7 +201,10 @@
         .btn-primary::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: var(--bright-gold);
             z-index: -1;
             transform: scaleX(0);
@@ -239,7 +253,7 @@
             top: 100px;
             right: 40px;
             width: 350px;
-            background: linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,0.8));
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
             border-right: 2px solid var(--ember-gold);
             padding: 30px;
             pointer-events: auto;
@@ -302,8 +316,15 @@
         }
 
         @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
         }
 
         .intercept-content {
@@ -338,8 +359,15 @@
         }
 
         @keyframes cursor-blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
         }
 
         .side-title {
@@ -358,7 +386,7 @@
             line-height: 1;
             color: var(--off-white);
             margin-bottom: 20px;
-            text-shadow: 0 0 20px rgba(255,255,255,0.2);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
         }
 
         .side-data {
@@ -380,7 +408,7 @@
 
         .app-bottom {
             width: 100%;
-            background: linear-gradient(0deg, rgba(0,0,0,0.9), transparent);
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.9), transparent);
             padding: 40px;
             display: flex;
             justify-content: center;
@@ -397,7 +425,7 @@
             border-radius: 4px;
             padding: 15px 25px;
             backdrop-filter: blur(15px);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
             transition: border-color 0.3s;
         }
 
@@ -424,7 +452,7 @@
         }
 
         .cmd-input::placeholder {
-            color: rgba(255,255,255,0.2);
+            color: rgba(255, 255, 255, 0.2);
         }
 
         .cmd-btn {
@@ -487,9 +515,9 @@
             margin-bottom: 20px;
             color: var(--off-white);
         }
-        
+
         .setup-warning {
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
             font-size: 14px;
             margin-bottom: 30px;
             padding-left: 10px;
@@ -539,29 +567,38 @@
             color: var(--bright-gold);
             text-shadow: 0 0 10px var(--bright-gold);
         }
-
     </style>
 </head>
+
 <body>
 
     <div id="setup-overlay" style="display: none;">
-        <div class="setup-modal">
+        <div class="setup-modal" style="position: relative;">
+            <button id="setup-close-btn"
+                style="display: none; position: absolute; top: 15px; right: 20px; background: none; border: 1px solid var(--matrix-green); color: var(--matrix-green); font-family: var(--font-mono); font-size: 14px; padding: 4px 12px; cursor: pointer; letter-spacing: 1px; transition: all 0.3s ease;"
+                onmouseover="this.style.background='var(--matrix-green)';this.style.color='#000'"
+                onmouseout="this.style.background='none';this.style.color='var(--matrix-green)'">✕ BACK</button>
             <div class="setup-title">INITIALIZATION REQUIRED</div>
             <div class="setup-text">
                 To power the VG Intelligence mesh, you must establish a neural uplink.
                 <br><br>
                 <strong>Groq API Key Required</strong><br>
-                Get your free key at <a href="https://console.groq.com/keys" target="_blank" style="color: var(--matrix-green); text-decoration: underline;">console.groq.com/keys</a> — fast, accurate, zero cost.
+                Get your free key at <a href="https://console.groq.com/keys" target="_blank"
+                    style="color: var(--matrix-green); text-decoration: underline;">console.groq.com/keys</a> — fast,
+                accurate, zero cost.
             </div>
             <div class="setup-warning">
                 🔒 Your key is stored locally in your browser. It is never saved on our servers.
             </div>
             <form id="setup-form">
                 <div class="setup-input-group">
-                    <input type="password" class="setup-input" id="setup-api-key" placeholder="Enter Groq API Key (gsk_...)" required autocomplete="off">
+                    <input type="password" class="setup-input" id="setup-api-key"
+                        placeholder="Enter Groq API Key (gsk_...)" required autocomplete="off">
                     <button type="submit" class="setup-btn">CONNECT UPLINK</button>
                 </div>
-                <div id="setup-error" style="color: var(--dark-ember); font-family: var(--font-mono); font-size: 12px; margin-top: 10px;"></div>
+                <div id="setup-error"
+                    style="color: var(--dark-ember); font-family: var(--font-mono); font-size: 12px; margin-top: 10px;">
+                </div>
             </form>
         </div>
     </div>
@@ -580,20 +617,23 @@
         <section class="scroll-section" id="sec-feat1">
             <div class="content-block g-slide-up">
                 <h2>DEEP PATTERN RECOGNITION</h2>
-                <p>We do not rely on static databases. The VG constructs a live 3D decision network, ingesting millions of geopolitical signals to form an actively evolving graph of global power dynamics.</p>
+                <p>We do not rely on static databases. The VG constructs a live 3D decision network, ingesting millions
+                    of geopolitical signals to form an actively evolving graph of global power dynamics.</p>
             </div>
         </section>
 
         <section class="scroll-section" id="sec-feat2">
             <div class="content-block content-right g-slide-up">
                 <h2>HISTORICAL PRECEDENT</h2>
-                <p>By mapping current events directly to historical shifts, the graph anticipates outcomes with mathematical precision. No guesswork. Pure connection.</p>
+                <p>By mapping current events directly to historical shifts, the graph anticipates outcomes with
+                    mathematical precision. No guesswork. Pure connection.</p>
             </div>
         </section>
 
         <section class="scroll-section cta-section">
             <div class="g-slide-up">
-                <h2 style="font-family: var(--font-display); font-size: 64px; margin-bottom: 30px;">READY TO COMMAND?</h2>
+                <h2 style="font-family: var(--font-display); font-size: 64px; margin-bottom: 30px;">READY TO COMMAND?
+                </h2>
                 <button class="btn-primary" id="btn-enter-app">INITIALIZE THE VG</button>
             </div>
         </section>
@@ -618,17 +658,17 @@
         <aside class="app-side" id="results-panel">
             <div class="side-title">VERDICT CONSTRUCT</div>
             <div class="side-verdict" id="res-verdict">Awaiting Data...</div>
-            
+
             <div class="side-data">
                 <strong>PATTERN DETECTED</strong>
                 <span id="res-pattern">...</span>
             </div>
-            
+
             <div class="side-data">
                 <strong>HISTORICAL MATCH</strong>
                 <span id="res-precedent">...</span>
             </div>
-            
+
             <div class="side-data">
                 <strong>REASONING LOG</strong>
                 <span id="res-reasoning">...</span>
@@ -638,7 +678,8 @@
         <footer class="app-bottom">
             <form class="cmd-wrapper" id="cmd-form">
                 <span class="cmd-prompt">_></span>
-                <input type="text" class="cmd-input" id="cmd-input" placeholder="Inject target parameters into the mesh..." autocomplete="off">
+                <input type="text" class="cmd-input" id="cmd-input"
+                    placeholder="Inject target parameters into the mesh..." autocomplete="off">
                 <button type="submit" class="cmd-btn">EXECUTE</button>
             </form>
         </footer>
@@ -666,7 +707,7 @@
             const key = document.getElementById('setup-api-key').value.trim();
             const errorDiv = document.getElementById('setup-error');
             const btn = e.target.querySelector('button');
-            
+
             if (!key) {
                 errorDiv.textContent = 'Please enter an API key.';
                 return;
@@ -697,6 +738,20 @@
             document.getElementById('setup-error').textContent = '';
             const btn = document.querySelector('#setup-form button');
             if (btn) btn.textContent = 'CONNECT UPLINK';
+            // Show close/back button only if user already has a key
+            const closeBtn = document.getElementById('setup-close-btn');
+            if (getApiKey()) {
+                closeBtn.style.display = 'block';
+            } else {
+                closeBtn.style.display = 'none';
+            }
+        });
+
+        // Close/Back button on setup modal
+        document.getElementById('setup-close-btn').addEventListener('click', () => {
+            const overlay = document.getElementById('setup-overlay');
+            overlay.classList.add('hidden');
+            setTimeout(() => overlay.style.display = 'none', 500);
         });
 
         // Audio Context for sound effects
@@ -767,29 +822,29 @@
         function initNodesWithEntities(entities) {
             geoEntities = entities || [];
             entityNodes.clear();
-            
+
             // First nodes are geopolitical entities (larger, glowing)
             for (let i = 0; i < nodeCount; i++) {
                 let isEntity = false;
                 let entityName = '';
-                
+
                 if (i < geoEntities.length) {
                     isEntity = true;
                     entityName = geoEntities[i];
                     entityNodes.set(i, entityName);
                 }
-                
+
                 const theta = Math.random() * Math.PI * 2;
                 const phi = Math.acos((Math.random() * 2) - 1);
-                const r = isEntity 
+                const r = isEntity
                     ? 20 + Math.random() * 20  // Entities closer to center
                     : Math.pow(Math.random(), 0.5) * graphRadius;
-                positions[i*3] = r * Math.sin(phi) * Math.cos(theta);
-                positions[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
-                positions[i*3+2] = r * Math.cos(phi);
+                positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+                positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+                positions[i * 3 + 2] = r * Math.cos(phi);
                 entityNames[i] = entityName;
                 velocities.push(new THREE.Vector3((Math.random() - 0.5) * 0.1, (Math.random() - 0.5) * 0.1, (Math.random() - 0.5) * 0.1));
-                
+
                 // Entity nodes are gold/glowing, regular nodes are cyan
                 let c;
                 if (isEntity) {
@@ -799,9 +854,9 @@
                 } else {
                     c = colorCyan;
                 }
-                colors[i*3] = c.r;
-                colors[i*3+1] = c.g;
-                colors[i*3+2] = c.b;
+                colors[i * 3] = c.r;
+                colors[i * 3 + 1] = c.g;
+                colors[i * 3 + 2] = c.b;
             }
         }
 
@@ -834,46 +889,46 @@
             const posArray = geometry.attributes.position.array;
             const linePositions = []; const lineColors = [];
             let connectionCount = 0;
-            
+
             // Check for entity connections (highlighted in red)
             const entityIndices = Array.from(entityNodes.keys());
             const connectedPairs = [];
-            
+
             // Draw regular connections first
             for (let i = 0; i < nodeCount; i++) {
                 for (let j = i + 1; j < nodeCount; j++) {
-                    const dx = posArray[i*3] - posArray[j*3];
-                    const dy = posArray[i*3+1] - posArray[j*3+1];
-                    const dz = posArray[i*3+2] - posArray[j*3+2];
-                    const distSq = dx*dx + dy*dy + dz*dz;
-                    
+                    const dx = posArray[i * 3] - posArray[j * 3];
+                    const dy = posArray[i * 3 + 1] - posArray[j * 3 + 1];
+                    const dz = posArray[i * 3 + 2] - posArray[j * 3 + 2];
+                    const distSq = dx * dx + dy * dy + dz * dz;
+
                     // Check if both are entities - draw red connection
                     const isIEntity = entityNodes.has(i);
                     const isJEntity = entityNodes.has(j);
-                    
+
                     if (isIEntity && isJEntity && distSq < 2500) {
                         // Entities connected - RED glowing line
-                        linePositions.push(posArray[i*3], posArray[i*3+1], posArray[i*3+2], posArray[j*3], posArray[j*3+1], posArray[j*3+2]);
+                        linePositions.push(posArray[i * 3], posArray[i * 3 + 1], posArray[i * 3 + 2], posArray[j * 3], posArray[j * 3 + 1], posArray[j * 3 + 2]);
                         lineColors.push(colorRed.r, colorRed.g, colorRed.b, colorRed.r, colorRed.g, colorRed.b);
                         connectedPairs.push([i, j]);
                         connectionCount++;
                         if (connectionCount > 500) break;
                     } else if (distSq < 400) {
                         // Regular connection - use node colors
-                        linePositions.push(posArray[i*3], posArray[i*3+1], posArray[i*3+2], posArray[j*3], posArray[j*3+1], posArray[j*3+2]);
-                        lineColors.push(colors[i*3], colors[i*3+1], colors[i*3+2], colors[j*3], colors[j*3+1], colors[j*3+2]);
-                        connectionCount++; if(connectionCount > 1500) break;
+                        linePositions.push(posArray[i * 3], posArray[i * 3 + 1], posArray[i * 3 + 2], posArray[j * 3], posArray[j * 3 + 1], posArray[j * 3 + 2]);
+                        lineColors.push(colors[i * 3], colors[i * 3 + 1], colors[i * 3 + 2], colors[j * 3], colors[j * 3 + 1], colors[j * 3 + 2]);
+                        connectionCount++; if (connectionCount > 1500) break;
                     }
                 }
-                if(connectionCount > 1500) break;
+                if (connectionCount > 1500) break;
             }
             connectionPairs = connectedPairs;
-            
+
             if (linesMesh) scene.remove(linesMesh);
             const lineGeo = new THREE.BufferGeometry();
             lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
             lineGeo.setAttribute('color', new THREE.Float32BufferAttribute(lineColors, 3));
-            
+
             // Red lines are more prominent
             const customLineMat = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: isProcessing ? 0.4 : 0.15, blending: THREE.AdditiveBlending });
             linesMesh = new THREE.LineSegments(lineGeo, customLineMat);
@@ -885,17 +940,17 @@
 
         function animate() {
             requestAnimationFrame(animate);
-            points.rotation.y += 0.001; if(linesMesh) linesMesh.rotation.y += 0.001;
+            points.rotation.y += 0.001; if (linesMesh) linesMesh.rotation.y += 0.001;
             const posAttr = geometry.attributes.position; const posArray = posAttr.array;
             const speedMult = isProcessing ? 5.0 : 1.0;
             for (let i = 0; i < nodeCount; i++) {
-                const x = posArray[i*3], y = posArray[i*3+1], z = posArray[i*3+2];
-                const distSq = x*x + y*y + z*z;
-                if (distSq > graphRadius*graphRadius * 1.5) { velocities[i].x -= x * 0.0001; velocities[i].y -= y * 0.0001; velocities[i].z -= z * 0.0001; }
-                posArray[i*3] += velocities[i].x * speedMult; posArray[i*3+1] += velocities[i].y * speedMult; posArray[i*3+2] += velocities[i].z * speedMult;
+                const x = posArray[i * 3], y = posArray[i * 3 + 1], z = posArray[i * 3 + 2];
+                const distSq = x * x + y * y + z * z;
+                if (distSq > graphRadius * graphRadius * 1.5) { velocities[i].x -= x * 0.0001; velocities[i].y -= y * 0.0001; velocities[i].z -= z * 0.0001; }
+                posArray[i * 3] += velocities[i].x * speedMult; posArray[i * 3 + 1] += velocities[i].y * speedMult; posArray[i * 3 + 2] += velocities[i].z * speedMult;
             }
             posAttr.needsUpdate = true; updateLines();
-            if (isAppMode) { camera.position.x += (mouseX * 20 - camera.position.x) * 0.05; camera.position.y += (mouseY * 20 - camera.position.y) * 0.05; camera.lookAt(0,0,0); }
+            if (isAppMode) { camera.position.x += (mouseX * 20 - camera.position.x) * 0.05; camera.position.y += (mouseY * 20 - camera.position.y) * 0.05; camera.lookAt(0, 0, 0); }
             renderer.render(scene, camera);
         }
         animate();
@@ -914,7 +969,7 @@
         btnEnter.addEventListener('click', () => {
             document.body.classList.add('app-mode'); window.scrollTo(0, 0); ScrollTrigger.disable();
             isAppMode = true;
-            gsap.to(scrollContainer, { opacity: 0, duration: 1, onComplete: () => { scrollContainer.style.display = 'none'; }});
+            gsap.to(scrollContainer, { opacity: 0, duration: 1, onComplete: () => { scrollContainer.style.display = 'none'; } });
             gsap.to(camera.position, { z: 90, y: 0, x: 0, duration: 2, ease: "power3.inOut" });
             appInterface.classList.add('active');
         });
@@ -950,7 +1005,7 @@
             interceptPanel.classList.add('show');
             isProcessing = true;
             if (linesMesh) linesMesh.material.color.setHex(0xE85D04);
-            
+
             try {
                 const apiKey = getApiKey();
                 if (!apiKey) {
@@ -960,32 +1015,32 @@
                 }
                 const response = await fetch("/api/analyze", { method: "POST", headers: { "Content-Type": "application/json", "X-API-Key": apiKey }, body: JSON.stringify({ question: query, enhanced: true }) });
                 const data = await response.json();
-                
+
                 // Extract entities and update graph
                 if (data.result && data.result.geo_entities) {
                     geoEntities = data.result.geo_entities;
                     initNodesWithEntities(geoEntities);
                     geometry.attributes.position.needsUpdate = true;
                     geometry.attributes.color.needsUpdate = true;
-                    
+
                     await streamLiveIntercept(`ENTITY MAPPING...\nDetected ${geoEntities.length} geopolitical nodes`, 'system');
                     for (const ent of geoEntities.slice(0, 5)) {
                         await streamLiveIntercept(`♪ Node: ${ent}`, 'system');
                     }
                 }
-                
+
                 // Stream agent thoughts
                 if (data.result && data.result.agent_results) {
                     const agents = data.result.agent_results;
                     for (const agent of agents.slice(0, 5)) {
-                        const source = agent.agent_name?.toLowerCase().includes('chanakya') ? 'chanakya' : 
-                                      agent.agent_name?.toLowerCase().includes('skeptic') ? 'skeptic' : 'system';
+                        const source = agent.agent_name?.toLowerCase().includes('chanakya') ? 'chanakya' :
+                            agent.agent_name?.toLowerCase().includes('skeptic') ? 'skeptic' : 'system';
                         const thought = `[${agent.agent_name}] ${(agent.stance || '').slice(0, 80)}`;
                         await streamLiveIntercept(thought, source);
                     }
                     if (agents.length > 0) playConnectSound();
                 }
-                
+
                 setTimeout(() => {
                     isProcessing = false;
                     if (linesMesh) linesMesh.material.color.setHex(0x4FB8C9);
@@ -998,12 +1053,12 @@
                     resultsPanel.classList.add('show');
                 }, 1500);
             } catch (err) {
-                setTimeout(() => { 
-                    isProcessing = false; 
-                    if (linesMesh) linesMesh.material.color.setHex(0x4FB8C9); 
-                    resVerdict.textContent = "CONNECTION SEVERED"; 
-                    resVerdict.style.color = "var(--dark-ember)"; 
-                    resultsPanel.classList.add('show'); 
+                setTimeout(() => {
+                    isProcessing = false;
+                    if (linesMesh) linesMesh.material.color.setHex(0x4FB8C9);
+                    resVerdict.textContent = "CONNECTION SEVERED";
+                    resVerdict.style.color = "var(--dark-ember)";
+                    resultsPanel.classList.add('show');
                 }, 2000);
             }
         });
@@ -1011,4 +1066,5 @@
         window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
     </script>
 </body>
+
 </html>
