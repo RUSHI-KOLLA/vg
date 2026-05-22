@@ -567,6 +567,191 @@
             color: var(--bright-gold);
             text-shadow: 0 0 10px var(--bright-gold);
         }
+
+        /* ═══════════════════════════════════════════════════════
+           MOBILE RESPONSIVE (screens under 768px)
+           ═══════════════════════════════════════════════════════ */
+        @media (max-width: 768px) {
+
+            /* ─── Landing Page ─── */
+            .scroll-section {
+                padding: 0 6vw;
+            }
+
+            .hero-title {
+                font-size: clamp(50px, 18vw, 100px);
+            }
+
+            .hero-subtitle {
+                font-size: 10px;
+                letter-spacing: 0.3em;
+            }
+
+            .content-block {
+                padding: 20px;
+                max-width: 100%;
+            }
+
+            .content-block h2 {
+                font-size: 28px;
+            }
+
+            .content-block p {
+                font-size: 14px;
+            }
+
+            .cta-section h2 {
+                font-size: 36px !important;
+                margin-bottom: 20px !important;
+            }
+
+            .btn-primary {
+                font-size: 14px;
+                padding: 14px 30px;
+            }
+
+            /* ─── App Header ─── */
+            .app-top {
+                flex-direction: column;
+                gap: 4px;
+                padding: 12px 15px;
+                font-size: 9px;
+                letter-spacing: 0.1em;
+                text-align: center;
+            }
+
+            /* ─── Live Intercept Panel ─── */
+            .live-intercept {
+                position: fixed;
+                top: auto;
+                bottom: 80px;
+                left: 0;
+                right: 0;
+                width: 100%;
+                max-height: 35vh;
+                border-radius: 8px 8px 0 0;
+                border: 1px solid var(--matrix-green);
+                border-bottom: none;
+                font-size: 10px;
+                padding: 10px;
+                z-index: 60;
+            }
+
+            .live-intercept.show {
+                transform: translateX(0);
+            }
+
+            /* ─── Results Side Panel (Verdict) ─── */
+            .app-side {
+                position: fixed;
+                top: auto;
+                bottom: 80px;
+                left: 0;
+                right: 0;
+                width: 100%;
+                max-height: 45vh;
+                border-right: none;
+                border-top: 2px solid var(--ember-gold);
+                border-radius: 8px 8px 0 0;
+                padding: 20px 15px;
+                overflow-y: auto;
+                transform: translateY(100%);
+                z-index: 55;
+            }
+
+            .app-side.show {
+                transform: translateY(0);
+            }
+
+            .side-title {
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+
+            .side-verdict {
+                font-size: 20px;
+                margin-bottom: 12px;
+            }
+
+            .side-data {
+                font-size: 12px;
+                margin-bottom: 10px;
+            }
+
+            /* ─── Command Bar ─── */
+            .app-bottom {
+                padding: 10px 12px;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 70;
+                background: rgba(0, 0, 0, 0.95);
+            }
+
+            .cmd-wrapper {
+                padding: 10px 12px;
+                border-radius: 8px;
+            }
+
+            .cmd-prompt {
+                font-size: 16px;
+                margin-right: 8px;
+            }
+
+            .cmd-input {
+                font-size: 14px;
+            }
+
+            .cmd-btn {
+                font-size: 11px;
+                padding: 8px 12px;
+                letter-spacing: 0.1em;
+            }
+
+            /* ─── Setup Modal ─── */
+            .setup-modal {
+                width: 92vw;
+                max-width: 92vw;
+                padding: 25px 18px;
+            }
+
+            .setup-title {
+                font-size: 22px;
+            }
+
+            .setup-text {
+                font-size: 13px;
+            }
+
+            .setup-input-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .setup-input {
+                width: 100%;
+                font-size: 13px;
+            }
+
+            .setup-btn {
+                width: 100%;
+                padding: 14px;
+            }
+
+            #setup-close-btn {
+                top: 10px !important;
+                right: 10px !important;
+                font-size: 12px !important;
+                padding: 4px 10px !important;
+            }
+
+            /* ─── Scroll indicator ─── */
+            .scroll-indicator {
+                font-size: 10px;
+                letter-spacing: 0.2em;
+            }
+        }
     </style>
 </head>
 
