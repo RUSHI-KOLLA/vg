@@ -737,7 +737,7 @@
                 padding: 14px 8px;
                 cursor: pointer;
                 pointer-events: auto;
-                transition: background 0.3s, padding 0.3s;
+                transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s;
                 font-family: var(--font-mono);
                 letter-spacing: 0;
                 line-height: 1;
@@ -750,7 +750,6 @@
 
             .intercept-toggle.open {
                 left: min(85vw, 340px);
-                border-radius: 0 6px 6px 0;
             }
 
             /* ─── Command Bar — fixed at bottom ─── */
@@ -900,14 +899,14 @@
         </section>
     </div>
 
+    <!-- Mobile toggle for Live Intercept (outside app-interface to avoid pointer-events:none) -->
+    <button id="intercept-toggle" class="intercept-toggle" aria-label="Toggle Live Intercept">▶</button>
+
     <div id="app-interface">
         <header class="app-top">
             <span>VG ONLINE</span>
             <span><span class="settings-link" id="btn-settings">⚙ SETTINGS</span> · GRAPH LINK: STABLE</span>
         </header>
-
-        <!-- Mobile toggle for Live Intercept -->
-        <button id="intercept-toggle" class="intercept-toggle" aria-label="Toggle Live Intercept">▶</button>
 
         <aside class="live-intercept" id="live-intercept">
             <div class="intercept-header">
@@ -1329,7 +1328,6 @@
 
         // ─── Mobile Intercept Drawer Toggle ───
         const interceptToggle = document.getElementById('intercept-toggle');
-        const interceptPanel = document.getElementById('live-intercept');
         let interceptOpen = false;
 
         interceptToggle.addEventListener('click', () => {
