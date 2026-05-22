@@ -568,18 +568,16 @@
             text-shadow: 0 0 10px var(--bright-gold);
         }
 
-        .mobile-live-toggle {
-            display: none;
-        }
-
-        .mobile-only {
-            display: none;
-        }
-
         /* ═══════════════════════════════════════════════════════
-           MOBILE RESPONSIVE — Redesigned for native feel
-           Layout: Header (sticky) → scrollable feed → command bar (fixed)
+           MOBILE RESPONSIVE — Native mobile feel
+           Verdict = inline card · Intercept = slide-out drawer
            ═══════════════════════════════════════════════════════ */
+
+        /* Toggle button — HIDDEN on desktop */
+        .intercept-toggle {
+            display: none;
+        }
+
         @media (max-width: 768px) {
 
             /* ─── Landing Page ─── */
@@ -624,137 +622,138 @@
                 letter-spacing: 0.2em;
             }
 
-            /* ─── App Interface — vertical column layout ─── */
+            /* ─── App Layout ─── */
             #app-interface {
-                justify-content: flex-start;
-                overflow-y: auto;
-                -webkit-overflow-scrolling: touch;
-                padding-bottom: 75px; /* room for fixed command bar */
+                justify-content: space-between;
             }
 
-            /* ─── App Header — compact, sticky ─── */
+            /* ─── Header — single clean line ─── */
             .app-top {
-                flex-direction: column;
-                gap: 2px;
+                flex-direction: row;
+                justify-content: space-between;
                 padding: 10px 15px;
                 font-size: 9px;
                 letter-spacing: 0.1em;
-                text-align: center;
                 flex-shrink: 0;
-                background: rgba(0, 0, 0, 0.85);
+                background: rgba(0, 0, 0, 0.8);
                 backdrop-filter: blur(10px);
-                position: sticky;
-                top: 0;
-                z-index: 30;
             }
 
-            /* ──────────────────────────────────────────────
-               KEY CHANGE: Panels become in-flow blocks
-               instead of floating absolute-positioned overlays.
-               They stack vertically like a feed.
-               ────────────────────────────────────────────── */
-
-            /* Verdict panel — shows as a card in the feed */
+            /* ─── Verdict Panel — clean card at top-right area ─── */
             .app-side {
-                position: relative;
-                top: auto;
-                right: auto;
-                width: 100%;
-                max-height: none;
-                background: rgba(0, 0, 0, 0.85);
+                position: fixed;
+                top: 50px;
+                left: 10px;
+                right: 10px;
+                width: auto;
+                max-height: calc(100vh - 140px);
+                overflow-y: auto;
+                background: rgba(0, 0, 0, 0.92);
+                border: 1px solid var(--ember-gold);
                 border-right: none;
-                border-bottom: 2px solid var(--ember-gold);
-                border-radius: 0;
-                padding: 20px 15px;
-                backdrop-filter: blur(10px);
-                overflow-y: visible;
-                flex-shrink: 0;
-                /* Override desktop show/hide transform */
-                transform: none;
+                border-left: 3px solid var(--ember-gold);
+                border-radius: 4px;
+                padding: 18px 15px;
+                backdrop-filter: blur(15px);
+                transform: translateY(-20px);
                 opacity: 0;
-                max-height: 0;
-                overflow: hidden;
-                transition: opacity 0.4s ease, max-height 0.5s ease;
+                transition: transform 0.4s ease, opacity 0.4s ease;
+                z-index: 40;
             }
 
             .app-side.show {
-                transform: none;
+                transform: translateY(0);
                 opacity: 1;
-                max-height: 600px;
-                overflow-y: visible;
             }
 
             .side-title {
-                font-size: 13px;
+                font-size: 11px;
                 margin-bottom: 8px;
             }
 
             .side-verdict {
-                font-size: 18px;
-                line-height: 1.3;
+                font-size: 16px;
+                line-height: 1.35;
                 margin-bottom: 12px;
             }
 
             .side-data {
-                font-size: 12px;
+                font-size: 11px;
                 line-height: 1.5;
                 margin-bottom: 10px;
             }
 
-            /* Live intercept — mobile drawer style */
+            .side-data strong {
+                font-size: 9px;
+            }
+
+            /* ─── Live Intercept — slide-out drawer from left ─── */
             .live-intercept {
                 position: fixed;
-                top: 0;
+                top: 50px;
                 left: 0;
-                width: 85%;
-                height: 100vh;
-                max-height: 100vh;
+                bottom: 70px;
+                width: 85vw;
+                max-width: 340px;
+                max-height: none;
+                height: auto;
                 background: rgba(0, 0, 0, 0.95);
                 border: none;
                 border-right: 2px solid var(--matrix-green);
                 border-radius: 0;
-                padding: 50px 15px 15px 15px;
+                padding: 12px;
                 font-size: 11px;
-                backdrop-filter: blur(10px);
-                z-index: 90;
-                transform: translateX(-100%);
-                opacity: 1;
-                transition: transform 0.4s ease;
+                backdrop-filter: blur(15px);
                 overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                /* Slide from left */
+                transform: translateX(-100%);
+                transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+                z-index: 90;
             }
 
             .live-intercept.show {
-                transform: translateX(-100%); /* Stays hidden until toggled */
+                transform: translateX(-100%); /* Keep hidden by default on mobile */
             }
 
-            .live-intercept.open-drawer {
-                transform: translateX(0);
+            .live-intercept.mobile-open {
+                transform: translateX(0) !important; /* Open when toggle is pressed */
             }
 
-            .mobile-live-toggle {
-                display: flex;
+            /* ─── Intercept Toggle Arrow — left edge tab ─── */
+            .intercept-toggle {
+                display: block;
                 position: fixed;
                 left: 0;
                 top: 50%;
                 transform: translateY(-50%);
-                background: rgba(0,0,0,0.8);
+                z-index: 91;
+                background: rgba(0, 0, 0, 0.85);
                 border: 1px solid var(--matrix-green);
                 border-left: none;
+                border-radius: 0 6px 6px 0;
                 color: var(--matrix-green);
-                padding: 15px 5px;
-                border-radius: 0 8px 8px 0;
-                z-index: 85;
-                align-items: center;
-                justify-content: center;
-                font-size: 16px;
+                font-size: 14px;
+                padding: 14px 8px;
                 cursor: pointer;
+                pointer-events: auto;
+                transition: background 0.3s, padding 0.3s;
+                font-family: var(--font-mono);
+                letter-spacing: 0;
+                line-height: 1;
             }
 
-            .mobile-only {
-                display: block;
+            .intercept-toggle:active {
+                background: var(--matrix-green);
+                color: #000;
             }
 
-            /* ─── Command Bar — fixed at bottom, always visible ─── */
+            .intercept-toggle.open {
+                left: min(85vw, 340px);
+                border-radius: 0 6px 6px 0;
+            }
+
+            /* ─── Command Bar — fixed at bottom ─── */
             .app-bottom {
                 position: fixed;
                 bottom: 0;
@@ -765,7 +764,6 @@
                 backdrop-filter: blur(15px);
                 border-top: 1px solid rgba(79, 184, 201, 0.15);
                 z-index: 80;
-                margin-top: 0;
             }
 
             .cmd-wrapper {
@@ -781,7 +779,7 @@
 
             .cmd-input {
                 font-size: 14px;
-                min-width: 0; /* prevent overflow */
+                min-width: 0;
             }
 
             .cmd-btn {
@@ -791,7 +789,7 @@
                 white-space: nowrap;
             }
 
-            /* ─── Setup Modal — mobile-friendly ─── */
+            /* ─── Setup Modal ─── */
             .setup-modal {
                 width: 92vw;
                 max-width: 92vw;
@@ -904,16 +902,14 @@
 
     <div id="app-interface">
         <header class="app-top">
-            <span>SYS ONLINE · VG</span>
+            <span>VG ONLINE</span>
             <span><span class="settings-link" id="btn-settings">⚙ SETTINGS</span> · GRAPH LINK: STABLE</span>
         </header>
 
-        <div id="mobile-live-toggle" class="mobile-live-toggle">
-            ❯
-        </div>
+        <!-- Mobile toggle for Live Intercept -->
+        <button id="intercept-toggle" class="intercept-toggle" aria-label="Toggle Live Intercept">▶</button>
 
         <aside class="live-intercept" id="live-intercept">
-            <button id="mobile-live-close" class="mobile-only" style="position: absolute; top: 15px; right: 15px; background: none; border: none; color: var(--matrix-green); font-size: 20px; cursor: pointer;">✕</button>
             <div class="intercept-header">
                 <span class="intercept-title">LIVE INTERCEPT</span>
                 <div class="intercept-status"></div>
@@ -1021,22 +1017,6 @@
             overlay.classList.add('hidden');
             setTimeout(() => overlay.style.display = 'none', 500);
         });
-
-        // Mobile drawer toggle
-        const liveIntercept = document.getElementById('live-intercept');
-        const mobileLiveToggle = document.getElementById('mobile-live-toggle');
-        const mobileLiveClose = document.getElementById('mobile-live-close');
-
-        if (mobileLiveToggle) {
-            mobileLiveToggle.addEventListener('click', () => {
-                liveIntercept.classList.add('open-drawer');
-            });
-        }
-        if (mobileLiveClose) {
-            mobileLiveClose.addEventListener('click', () => {
-                liveIntercept.classList.remove('open-drawer');
-            });
-        }
 
         // Audio Context for sound effects
         let audioCtx = null;
@@ -1344,6 +1324,24 @@
                     resVerdict.style.color = "var(--dark-ember)";
                     resultsPanel.classList.add('show');
                 }, 2000);
+            }
+        });
+
+        // ─── Mobile Intercept Drawer Toggle ───
+        const interceptToggle = document.getElementById('intercept-toggle');
+        const interceptPanel = document.getElementById('live-intercept');
+        let interceptOpen = false;
+
+        interceptToggle.addEventListener('click', () => {
+            interceptOpen = !interceptOpen;
+            if (interceptOpen) {
+                interceptPanel.classList.add('mobile-open');
+                interceptToggle.classList.add('open');
+                interceptToggle.textContent = '◀';
+            } else {
+                interceptPanel.classList.remove('mobile-open');
+                interceptToggle.classList.remove('open');
+                interceptToggle.textContent = '▶';
             }
         });
 
