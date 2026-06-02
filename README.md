@@ -13,7 +13,7 @@
 
 The application is deployed and ready to use! Because VG Intelligence uses advanced multi-agent architecture, you must bring your own API key to power the logic engine.
 
-**[Launch VG Intelligence Live App](https://vg-production-1df6.up.railway.app/)**
+**[Launch VG Intelligence Live App](https://huggingface.co/spaces/kollarushi/vg)**
 
 **How to use the live app:**
 1. Go to the [Groq Console](https://console.groq.com/keys) and create a free API Key.
