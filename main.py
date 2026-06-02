@@ -211,6 +211,18 @@ def run_cli(argv: list[str]) -> None:
 
 def run_web(argv: list[str]) -> None:
     """Run the browser-native web server."""
+    # Ensure RAG database is built at startup if missing
+    from vg.config import config
+    db_path = config.chroma_db_path
+    sqlite_file = os.path.join(db_path, "chroma.sqlite3")
+    if not os.path.exists(sqlite_file):
+        print(f"📁 ChromaDB sqlite file not found at {sqlite_file}. Building RAG database now...")
+        try:
+            from vg.rag.builder import build_all
+            build_all()
+        except Exception as e:
+            print(f"❌ Failed to auto-build RAG database: {e}")
+
     host = _consume_option(argv, "--host", os.getenv("VG_HOST", "0.0.0.0"))
     port = int(_consume_option(argv, "--port", os.getenv("PORT", os.getenv("VG_PORT", "8080"))))
     from vg.api.server import run_server
