@@ -1306,7 +1306,7 @@
                 setTimeout(() => {
                     isProcessing = false;
                     if (linesMesh) linesMesh.material.color.setHex(0x4FB8C9);
-                    if (!response.ok) { resVerdict.textContent = "UPLINK ERROR"; resVerdict.style.color = "var(--dark-ember)"; }
+                    if (!response.ok) { resVerdict.textContent = data.error || "UPLINK ERROR"; resVerdict.style.color = "var(--dark-ember)"; resReasoning.textContent = data.detail || data.hint || ""; }
                     else {
                         const v = data.result.verdict || {};
                         resVerdict.textContent = v.majority_verdict || "INCONCLUSIVE"; resVerdict.style.color = "var(--off-white)";
