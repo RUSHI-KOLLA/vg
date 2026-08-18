@@ -228,9 +228,9 @@ Edit `.env` to customize:
 GROQ_API_KEY=your_groq_key
 TAVILY_API_KEY=your_tavily_key
 
-# Model Selection
-GROQ_MODEL_LARGE=llama-3.3-70b-versatile
-GROQ_MODEL_SMALL=llama-3.1-8b-instant
+# Model Selection (served via Groq — no external provider)
+GROQ_MODEL_LARGE=openai/gpt-oss-20b
+GROQ_MODEL_SMALL=allam-2-7b
 
 # Rate Limiting
 GROQ_RPM_LIMIT=15
