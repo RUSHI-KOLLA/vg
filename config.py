@@ -17,12 +17,12 @@ class Config:
     gemini_api_key: Optional[str] = None
 
     # --- Model Selection ---
-    model_large: str = "llama-3.3-70b-versatile"
-    model_small: str = "llama-3.1-8b-instant"
+    model_large: str = "groq/compound-mini"
+    model_small: str = "allam-2-7b"
     # Gemini 2.5 Flash with native context caching
     gemini_model: str = "gemini-2.0-flash"
     # Provider: 'gemini' or 'groq'
-    default_provider: str = "gemini"
+    default_provider: str = "groq"
 
     # --- Rate Limiting ---
     groq_rpm_limit: int = 15
@@ -58,10 +58,10 @@ def get_config() -> Config:
         groq_api_key=os.getenv("GROQ_API_KEY"),
         tavily_api_key=os.getenv("TAVILY_API_KEY"),
         gemini_api_key=os.getenv("GEMINI_API_KEY"),
-        model_large=os.getenv("GROQ_MODEL_LARGE", "llama-3.3-70b-versatile"),
-        model_small=os.getenv("GROQ_MODEL_SMALL", "llama-3.1-8b-instant"),
+        model_large=os.getenv("GROQ_MODEL_LARGE", "groq/compound-mini"),
+        model_small=os.getenv("GROQ_MODEL_SMALL", "allam-2-7b"),
         gemini_model=os.getenv("GEMINI_MODEL", "gemini-2.0-flash"),
-        default_provider=os.getenv("LLM_PROVIDER", "gemini"),
+        default_provider=os.getenv("LLM_PROVIDER", "groq"),
         groq_rpm_limit=int(os.getenv("GROQ_RPM_LIMIT", "15")),
         groq_max_concurrent=int(os.getenv("GROQ_MAX_CONCURRENT", "5")),
         groq_request_timeout_seconds=int(os.getenv("GROQ_REQUEST_TIMEOUT_SECONDS", "18")),

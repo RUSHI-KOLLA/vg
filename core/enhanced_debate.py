@@ -668,9 +668,9 @@ class EnhancedDebateCoordinator:
         Run judge with pattern-grounded context.
         """
         agents_summary = "\n".join([
-            f"- {r['agent_name']}: {r.get('stance', 'N/A')} (conf: {r.get('confidence', 0)}%)"
+            f"- {r['agent_name']}: {r.get('stance', 'N/A')[:120]} (conf: {r.get('confidence', 0)}%)"
             for r in agent_results if not r.get("error")
-        ])
+        ])[:1500]
 
         judge_prompt = f"""INTELLIGENCE ASSESSMENT — FINAL VERDICT REQUIRED
 
@@ -678,31 +678,15 @@ You are The Judge — CIA/RAW-style intelligence synthesizer.
 
 QUESTION: {question}
 
-{pattern_summary[:400] if pattern_summary else ""}
-
-AGENT POSITIONS (10 dimensions analyzed):
+AGENT POSITIONS:
 {agents_summary}
 
-YOUR TASK: Produce actionable intelligence verdict.
-
 RULES:
-- NEVER say "uncertain", "insufficient evidence", or "cannot determine"
-- ALWAYS produce bold, actionable prediction
-- Confidence MUST be 40-85% (no 100% certainty, no 0% abdication)
-- Use probabilistic language: "likely", "unlikely", "probable"
-- Ground in patterns, not just facts
+- NEVER say "uncertain" or "insufficient evidence"
+- ALWAYS produce bold prediction. Confidence 40-85%.
 
-Respond in JSON:
-{{
-  "majority_verdict": "BOLD actionable prediction (one sentence)",
-  "confidence": 40-85,
-  "key_pattern": "dominant pattern across dimensions",
-  "historical_precedent": "closest historical rhyme",
-  "strongest_dissent": "best counter-argument (one sentence)",
-  "reasoning": "how dimensions integrate (2 sentences max)"
-}}
-
-Intelligence verdict. JSON only. No disclaimers."""
+JSON only:
+{{"majority_verdict": "prediction", "confidence": 65, "key_pattern": "pattern", "historical_precedent": "rhyme", "strongest_dissent": "counter", "reasoning": "synthesis"}}"""
 
         verdicts = []
         for i in range(runs):

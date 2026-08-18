@@ -202,7 +202,12 @@ class GroqLLMClient:
 #  Provider Router (auto-selects based on config)
 # ──────────────────────────────────────────────
 def get_llm_client(provider: Optional[str] = None, model: Optional[str] = None, api_key: Optional[str] = None):
-    """Return a synchronous LLM client (Gemini or Groq based on config)."""
+    """Return a synchronous LLM client (Gemini or Groq based on config).
+    
+    If an api_key is explicitly provided, always use Groq (BYOK web mode).
+    """
+    if api_key:
+        return GroqLLMClient(model=model, api_key=api_key)
     selected_provider = provider or config.default_provider
     if selected_provider == "gemini" and GEMINI_AVAILABLE:
         return GeminiLLMClient(model=model)
@@ -213,7 +218,12 @@ def get_llm_client(provider: Optional[str] = None, model: Optional[str] = None, 
 
 
 def get_async_llm_client(provider: Optional[str] = None, model: Optional[str] = None, api_key: Optional[str] = None):
-    """Return an async LLM client (Gemini or Groq based on config)."""
+    """Return an async LLM client (Gemini or Groq based on config).
+    
+    If an api_key is explicitly provided, always use Groq (BYOK web mode).
+    """
+    if api_key:
+        return AsyncGroqLLMClient(model=model, api_key=api_key)
     selected_provider = provider or config.default_provider
     if selected_provider == "gemini" and GEMINI_AVAILABLE:
         return AsyncGeminiLLMClient(model=model)
