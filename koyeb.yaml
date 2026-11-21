@@ -1,0 +1,48 @@
+# Koyeb GitOps manifest for VG Intelligence
+# Deploy: push to main branch, or `koyeb apply -f koyeb.yaml`
+
+definition:
+  name: vg-intelligence
+  type: APP
+
+  git:
+    # Replace with your GitHub repo
+    repository: github.com/<your-username>/vg-intelligence
+    branch: main
+    build:
+      dockerfile: Dockerfile
+
+  services:
+    - name: web
+      instance_type: free
+      instance_size: nano  # 512 MB RAM, shared CPU
+      regions:
+        - was  # Washington, DC (US East) - change if needed: fra, sin, syd
+      http:
+        path: /
+        port: 7860
+        health_check:
+          path: /api/health
+          initial_delay: 30
+          period: 30
+          timeout: 10
+          failure_threshold: 3
+      env:
+        - name: PORT
+          value: "7860"
+        # Add your API keys in Koyeb dashboard (Settings → Variables) instead of here
+        # - name: GROQ_API_KEY
+        #   value: "gsk_..."
+        # - name: TAVILY_API_KEY
+        #   value: "tvly_..."
+
+  # Optional: custom domain (configure in Koyeb dashboard after first deploy)
+  # domains:
+  #   - vg.yourdomain.com
+
+  # Optional: auto-scaling (paid plans only)
+  # scaling:
+  #   min_instances: 1
+  #   max_instances: 3
+  #   metric: cpu
+  #   value: 70
